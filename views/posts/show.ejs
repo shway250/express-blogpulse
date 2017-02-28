@@ -7,5 +7,27 @@
 <p><%= post.content %></p>
 
 <hr />
+<h3 style="text-align: center">Comments!</h3>
+<form method="POST" action="">
+  <div>
+  <label for="name">Give your name:</label>
+    <div>
+      <input type="text" name="name">
+    </div>
+    <label for="comment">Leave a comment:</label>
+    <div>
+      <textarea rows="4" cols="50" id="comment" name="comment"></textarea>
+    </div>
+    <div>
+      <input type="submit">
+    </div>
+  </div>
+</form>
+
+<% post.comments.forEach(function(comment){%>
+      <h4><%= comment.name %></h4>
+      <p><%= comment.content %></p>
+      <p>--------------------------------------------------</p>
+    <%});%>
 
 <a href="/">&larr; Back Home</a>

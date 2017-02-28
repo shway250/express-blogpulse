@@ -32,7 +32,7 @@ router.get('/new', function(req, res) {
 router.get('/:id', function(req, res) {
   db.post.find({
     where: { id: req.params.id },
-    include: [db.author]
+    include: [db.author, db.comment]
   })
   .then(function(post) {
     if (!post) throw Error();
@@ -40,7 +40,34 @@ router.get('/:id', function(req, res) {
   })
   .catch(function(error) {
     res.status(400).render('main/404');
+  });    
+});
+
+router.post('/:id/comments', function(req, res){
+  db.post.findOne({where:{name:req.body.comment}}).then(function(comment){
+    if(comment){
+      post.createComment({
+        name: req.body.name,
+        content: req.body.content
+      }).then(function(comment){
+        res.send("it worked holy crap");
+      });
+    }else{
+      res.send("ur dumb");
+    }
   });
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
